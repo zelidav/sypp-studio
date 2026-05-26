@@ -43,8 +43,9 @@
   .peds{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.7rem}
   .ped{border:1px solid var(--line);border-radius:9px;overflow:hidden;cursor:pointer;background:var(--panel);transition:.2s;position:relative}
   .ped.sel{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset}
-  .ped .ph{height:84px;background:#fff;display:grid;place-items:center;overflow:hidden}
-  .ped .ph img{width:100%;height:100%;object-fit:contain}
+  .ped .ph{height:84px;background:radial-gradient(80% 90% at 50% 20%,#2a1a1e,#160c0f);display:grid;place-items:center;overflow:hidden;color:var(--gold)}
+  .ped .ph svg{width:78px;height:64px}
+  .ped.sel .ph{color:var(--gold)}
   .ped .lb{padding:.5rem .55rem}
   .ped .lb b{font-size:.74rem;font-weight:700;display:block}
   .ped .lb small{font-size:.62rem;color:var(--mute)}
@@ -184,6 +185,16 @@ const PEDS = {
 };
 let pedKey = "curved";
 
+// inline SVG silhouettes (front elevation) — self-hosted, no external images
+const TOP = '<rect x="14" y="20" width="92" height="8" rx="2.5" fill="currentColor" opacity=".9"/>';
+const SHAPES = {
+  curved: `<svg viewBox="0 0 120 90">${TOP}<path d="M30,28 C44,48 44,48 26,82 L94,82 C76,48 76,48 90,28 Z" fill="currentColor" opacity=".18" stroke="currentColor" stroke-width="2"/></svg>`,
+  oval:   `<svg viewBox="0 0 120 90">${TOP}<rect x="24" y="28" width="72" height="54" rx="24" fill="currentColor" opacity=".18" stroke="currentColor" stroke-width="2"/></svg>`,
+  square: `<svg viewBox="0 0 120 90">${TOP}<rect x="28" y="28" width="64" height="54" rx="3" fill="currentColor" opacity=".18" stroke="currentColor" stroke-width="2"/></svg>`,
+  round:  `<svg viewBox="0 0 120 90"><ellipse cx="60" cy="26" rx="27" ry="7" fill="currentColor" opacity=".9"/><path d="M33,26 v48 a27,8 0 0 0 54,0 v-48" fill="currentColor" opacity=".18" stroke="currentColor" stroke-width="2"/></svg>`,
+  led:    `<svg viewBox="0 0 120 90">${TOP}<rect x="28" y="28" width="64" height="54" rx="3" fill="currentColor" opacity=".12" stroke="currentColor" stroke-width="2"/><rect x="35" y="35" width="50" height="40" rx="2" fill="currentColor" opacity=".5"/></svg>`,
+};
+
 // ---- palette derivation (mirrors brandkit.derive_palette EXACTLY) ----
 const hx=c=>{c=c.replace('#','');return [0,2,4].map(i=>parseInt(c.substr(i,2),16));};
 const to=rgb=>'#'+rgb.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
@@ -210,7 +221,7 @@ function buildPeds(){
   $('peds').innerHTML='';
   for(const[k,v]of Object.entries(PEDS)){
     const d=document.createElement('div');d.className='ped'+(k===pedKey?' sel':'');
-    d.innerHTML=`<div class="ph"><img src="${v.ref}" alt="${v.label}" loading="lazy"/></div><div class="lb"><b>${v.label}</b><small>${v.dims}</small></div>`;
+    d.innerHTML=`<div class="ph">${SHAPES[k]}</div><div class="lb"><b>${v.label}</b><small>${v.dims}</small></div>`;
     d.onclick=()=>{pedKey=k;buildPeds();render();};
     $('peds').appendChild(d);
   }
