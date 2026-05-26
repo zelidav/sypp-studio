@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SYPP Cloud Bar — Brand Studio</title>
+<meta name="description" content="Spin up a brand-specific SYPP Cloud Bar pitch deck + reel. Branding from the site, vibe from a line — generate a ready brand.json."/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#140a0c; --bg2:#1c0f12; --panel:#221316; --line:rgba(240,207,134,.18);
+    --ink:#f4e9d6; --mute:#b89a86; --red:#d8222f; --red-br:#ff5a48;
+    --gold:#f0cf86; --gold-deep:#e8b13c;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Manrope',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(120% 80% at 80% -10%,#3a1116,transparent 55%),linear-gradient(160deg,#1c0f12,#0e0709);
+    color:var(--ink);font-family:var(--sans);font-weight:300;min-height:100vh;-webkit-font-smoothing:antialiased}
+  a{color:var(--gold)}
+  header{padding:2.2rem 6vw 1.4rem;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:.85rem}
+  .brand .seal{width:42px;height:42px;border-radius:9px;background:linear-gradient(135deg,var(--red),#7c0d15);display:grid;place-items:center;font-family:var(--serif);font-weight:600;color:var(--gold);font-size:1.5rem;box-shadow:0 0 0 1px var(--line)}
+  .brand h1{font-family:var(--serif);font-weight:500;font-size:1.5rem;letter-spacing:.01em}
+  .brand .k{font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  header .lead{font-size:.84rem;color:var(--mute);max-width:42ch}
+  main{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:start}
+  @media(max-width:920px){main{grid-template-columns:1fr}}
+  .form{padding:2rem 3vw 4rem 6vw}
+  .preview{padding:2rem 6vw 4rem 3vw;position:sticky;top:0}
+  @media(max-width:920px){.preview{position:static;border-top:1px solid var(--line)}}
+  .grp{margin-bottom:1.5rem}
+  .grp>label{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-bottom:.5rem}
+  .hint{font-size:.72rem;color:var(--mute);margin-top:.35rem;line-height:1.4}
+  input[type=text],textarea,select{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:7px;color:var(--ink);
+    font-family:var(--sans);font-size:.9rem;padding:.7rem .8rem;font-weight:400}
+  textarea{resize:vertical;min-height:64px;line-height:1.45}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 2px rgba(240,207,134,.16)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .seeds{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem}
+  .seed{text-align:center}
+  .seed input[type=color]{width:100%;height:42px;border:1px solid var(--line);border-radius:7px;background:none;cursor:pointer;padding:2px}
+  .seed span{display:block;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:.3rem}
+  .peds{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.7rem}
+  .ped{border:1px solid var(--line);border-radius:9px;overflow:hidden;cursor:pointer;background:var(--panel);transition:.2s;position:relative}
+  .ped.sel{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset}
+  .ped .ph{height:84px;background:#fff;display:grid;place-items:center;overflow:hidden}
+  .ped .ph img{width:100%;height:100%;object-fit:contain}
+  .ped .lb{padding:.5rem .55rem}
+  .ped .lb b{font-size:.74rem;font-weight:700;display:block}
+  .ped .lb small{font-size:.62rem;color:var(--mute)}
+  .toggle{display:flex;align-items:center;gap:.6rem;font-size:.84rem;color:var(--mute)}
+  .toggle input{width:auto}
+  .btn{display:inline-flex;align-items:center;gap:.5em;border:0;border-radius:8px;padding:.8em 1.3em;font-family:var(--sans);
+    font-weight:700;font-size:.82rem;letter-spacing:.04em;cursor:pointer;text-decoration:none}
+  .btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#2a1408}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .btns{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.5rem}
+  /* preview */
+  .pv-k{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-bottom:.7rem}
+  .swatches{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-bottom:1.4rem}
+  .sw{aspect-ratio:1;border-radius:5px;border:1px solid rgba(255,255,255,.08)}
+  .mini{border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .mini .cover{padding:2.4rem 1.6rem;text-align:center;position:relative}
+  .mini .coin{width:54px;height:54px;border-radius:11px;margin:0 auto .9rem;display:grid;place-items:center;font-family:var(--serif);font-size:1.7rem;font-weight:600}
+  .mini .marque{font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;margin-bottom:1rem;opacity:.85}
+  .mini h2{font-family:var(--serif);font-weight:500;font-size:1.9rem;line-height:1;margin-bottom:.5rem}
+  .mini .sub{font-size:.72rem;font-weight:400;opacity:.8}
+  .mini .light{padding:1.2rem 1.6rem}
+  .mini .light .kk{font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:.45rem}
+  .mini .light p{font-size:.74rem;line-height:1.5}
+  .mini .light .chip{display:inline-block;border-radius:20px;padding:.2em .7em;font-size:.62rem;font-weight:600;margin:.5rem .3rem 0 0;border:1px solid}
+  pre{background:#0c0608;border:1px solid var(--line);border-radius:9px;padding:1rem 1.1rem;overflow-x:auto;font-size:.74rem;
+    line-height:1.7;color:#d7c4a8;margin-top:.7rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+  pre .c{color:#7d6a52}
+  .steps{counter-reset:s;margin-top:.4rem}
+  .steps li{list-style:none;position:relative;padding-left:2.1em;margin:.55em 0;font-size:.82rem;color:var(--mute);line-height:1.45}
+  .steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-.1em;width:1.5em;height:1.5em;border-radius:50%;
+    background:var(--panel);border:1px solid var(--gold-deep);color:var(--gold);font-size:.7rem;font-weight:700;display:grid;place-items:center}
+  footer{padding:1.6rem 6vw;border-top:1px solid var(--line);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="seal">⛯</div>
+    <div><div class="k">SYPP Cloud Bar</div><h1>Brand Studio</h1></div>
+  </div>
+  <p class="lead">Spin up a brand-specific Cloud Bar pitch. Branding from the site, vibe from a line — generate a ready <code>brand.json</code>, then run three commands.</p>
+</header>
+
+<main>
+  <section class="form">
+    <div class="grp">
+      <label>Brand name &amp; website</label>
+      <div class="row">
+        <input id="name" type="text" placeholder="Brand name" value="Acme Cannabis"/>
+        <input id="site" type="text" placeholder="brand.com" value="acmecannabis.com"/>
+      </div>
+      <div class="hint">Slug &amp; deploy URL auto-derive: <b id="slugEcho">acme-cannabis</b>.syppit.com</div>
+    </div>
+
+    <div class="grp">
+      <label>The vibe <span style="color:var(--mute);font-weight:400;text-transform:none;letter-spacing:0">— drives every image &amp; video prompt</span></label>
+      <textarea id="vibe" placeholder="e.g. matte black & electric green, brutalist, streetwear energy, warm cinematic light">sleek matte black &amp; electric green, modern, bold streetwear energy, warm cinematic light</textarea>
+    </div>
+
+    <div class="grp">
+      <label>The device</label>
+      <div class="row">
+        <input id="device" type="text" placeholder="Device name" value="Chalice"/>
+        <input id="positioning" type="text" placeholder="Positioning" value="Luxury Cannabis Hospitality"/>
+      </div>
+      <textarea id="devdesc" style="margin-top:.7rem" placeholder="The SYPP Cloud Bar vessel re-skinned for this brand: exact look, finish, branding, hand-held scale. End with 'STRICT: only this device'."></textarea>
+    </div>
+
+    <div class="grp">
+      <label>Seed colors <span style="color:var(--mute);font-weight:400;text-transform:none;letter-spacing:0">— 5 colors, the full palette derives from these</span></label>
+      <div class="seeds">
+        <div class="seed"><input type="color" id="primary" value="#15c24a"/><span>Primary</span></div>
+        <div class="seed"><input type="color" id="accent" value="#e6e6e6"/><span>Accent</span></div>
+        <div class="seed"><input type="color" id="dark" value="#0c0c0c"/><span>Dark</span></div>
+        <div class="seed"><input type="color" id="light" value="#f4f7f2"/><span>Light</span></div>
+        <div class="seed"><input type="color" id="ink" value="#10241a"/><span>Ink</span></div>
+      </div>
+      <div class="hint">Pull these from the brand's logo/site. (The CLI <code>new_brand.py</code> can guess them from the URL automatically.)</div>
+    </div>
+
+    <div class="grp">
+      <label>Pop-up pedestal <span style="color:var(--mute);font-weight:400;text-transform:none;letter-spacing:0">— BestOfSigns shapes</span></label>
+      <div class="peds" id="peds"></div>
+      <div class="hint" id="pedHint"></div>
+    </div>
+
+    <div class="grp">
+      <label class="toggle"><input type="checkbox" id="cjk"/> CJK accents (Chinese seal glyphs on each slide)</label>
+    </div>
+
+    <div class="btns">
+      <button class="btn gold" id="dl">⬇ Download brand.json</button>
+      <button class="btn ghost" id="cpJson">Copy JSON</button>
+      <button class="btn ghost" id="cpCmd">Copy commands</button>
+    </div>
+  </section>
+
+  <aside class="preview">
+    <div class="pv-k">Live palette</div>
+    <div class="swatches" id="sw"></div>
+
+    <div class="pv-k">Deck preview</div>
+    <div class="mini" id="mini">
+      <div class="cover" id="mCover">
+        <div class="coin" id="mCoin">A</div>
+        <div class="marque" id="mMarque">ACME × SYPP CLOUD BAR</div>
+        <h2 id="mTitle">The Acme<br/>Cloud Ritual</h2>
+        <div class="sub" id="mSub">Luxury Cannabis Hospitality powered by SYPP Cloud Bar</div>
+      </div>
+      <div class="light" id="mLight">
+        <div class="kk" id="mKk">01 · Overview</div>
+        <p id="mP">The Chalice · the Cloud Bar pop-up · deploy in minutes — live in any licensed door.</p>
+        <span class="chip" id="mChip">The SYPP Package</span>
+      </div>
+    </div>
+
+    <div class="pv-k" style="margin-top:1.6rem">Then run</div>
+    <ol class="steps">
+      <li>Drop <code>brand.json</code> in <code>brands/&lt;slug&gt;/</code> + add <code>logo.png</code> &amp; reference images to <code>img/</code></li>
+      <li>Build &amp; generate:</li>
+    </ol>
+    <pre id="cmd"></pre>
+    <p class="hint">Repo: <code>zelidav/sypp-brand-pitch</code>. Or skip step 1 with <code>tools/new_brand.py &lt;slug&gt; &lt;site&gt; "vibe"</code> to seed from the site.</p>
+  </aside>
+</main>
+
+<footer>SYPP Cloud Bar · Brand Studio · studio.syppit.com</footer>
+
+<script>
+// ---- pedestal catalog (mirrors tools/pedestals.json) ----
+const PEDS = {
+  curved:{label:"Curved",dims:'≈ 37" W × 38" H',prompt:"a CURVED hourglass-profile fabric pop-up counter (concave waist, wider top and base), dye-sublimated brand graphic wrapping the front, a flat wooden top",ref:"https://cdn.bestofsigns.com/media/catalog/product/resize/424/n/5/n5_cfmfps01_1_bos.jpg",url:"https://www.bestofsigns.com/fabric-pop-up-counter-display.html"},
+  oval:{label:"Oval",dims:'≈ 56.5" W × 40" H',prompt:"an OVAL-front fabric pop-up counter (smooth rounded oval face), dye-sublimated brand graphic across the front, flat wooden top",ref:"https://cdn.bestofsigns.com/media/catalog/product/resize/424/n/5/n5_cfmfpu01_1_bos.jpg",url:"https://www.bestofsigns.com/fabric-pop-up-booth-oval.html"},
+  square:{label:"Square",dims:'≈ 85" W × 40" H',prompt:"a SQUARE straight-front fabric pop-up counter (clean flat rectangular face), dye-sublimated brand graphic, flat wooden top",ref:"https://cdn.bestofsigns.com/media/catalog/product/resize/424/n/5/n5_cfmfps01_1_bos.jpg",url:"https://www.bestofsigns.com/fabric-pop-up-booth-square.html"},
+  round:{label:"Round pillar",dims:"≈ 1.6 ft dia.",prompt:"a ROUND cylindrical pillar pop-up counter (full-round fabric column), dye-sublimated brand graphic wrapping all the way around, a round top",ref:"https://cdn.bestofsigns.com/media/catalog/product/resize/424/3/d/3d-cube-displays-lifestyle-1-bbcfm3dcd01_1_bos.jpg",url:"https://www.bestofsigns.com/pop-up-counters.html"},
+  led:{label:"Backlit LED",dims:'≈ 39" W × 38" H',prompt:"a BACKLIT LED fabric pop-up counter (the whole front graphic glows from within), dye-sublimated brand graphic, flat top",ref:"https://cdn.bestofsigns.com/media/catalog/product/resize/424/n/5/n5_cfmfps01_1_bos.jpg",url:"https://www.bestofsigns.com/backlit-promotional-counter-with-storage.html"}
+};
+let pedKey = "curved";
+
+// ---- palette derivation (mirrors brandkit.derive_palette EXACTLY) ----
+const hx=c=>{c=c.replace('#','');return [0,2,4].map(i=>parseInt(c.substr(i,2),16));};
+const to=rgb=>'#'+rgb.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
+const rgbstr=c=>hx(c).join(',');
+const lighten=(c,f)=>{const[r,g,b]=hx(c);return to([r+(255-r)*f,g+(255-g)*f,b+(255-b)*f]);};
+const darken=(c,f)=>{const[r,g,b]=hx(c);return to([r*(1-f),g*(1-f),b*(1-f)]);};
+const mix=(a,b,f)=>{const[ar,ag,ab]=hx(a),[br,bg,bb]=hx(b);return to([ar+(br-ar)*f,ag+(bg-ag)*f,ab+(bb-ab)*f]);};
+function derive(s){const p=s.primary,a=s.accent,dk=s.dark,lt=s.light,ink=s.ink;return{
+  bg:lt,bg2:lighten(lt,.35),ink:ink,mute:mix(ink,lt,.45),
+  red:p,red_deep:darken(p,.25),red_br:lighten(p,.18),
+  gold:darken(a,.15),gold_deep:darken(a,.35),gold_soft:a,
+  red_rgb:rgbstr(p),gold_rgb:rgbstr(darken(a,.15)),card:lighten(lt,.55),
+  red_bg:dk,red_bg2:darken(dk,.25),red_ink:mix(lt,'#ffffff',.35),red_mute:mix(mix(lt,'#ffffff',.35),dk,.32),
+  red_red:lighten(a,.22),red_red_deep:a,red_red_br:lighten(a,.42),
+  gold_or:a,gold_or_deep:darken(a,.2),gold_or_soft:lighten(a,.12),gold_or_rgb:rgbstr(a),
+  red_mid:lighten(dk,.16),red_dark:darken(dk,.3),vitrine:darken(dk,.35),
+  red_br_rgb:rgbstr(lighten(p,.18)),shadow_rgb:rgbstr(darken(dk,.2))};}
+
+const $=id=>document.getElementById(id);
+const slugify=s=>s.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function seed(){return{primary:$('primary').value,accent:$('accent').value,dark:$('dark').value,light:$('light').value,ink:$('ink').value};}
+
+function buildPeds(){
+  $('peds').innerHTML='';
+  for(const[k,v]of Object.entries(PEDS)){
+    const d=document.createElement('div');d.className='ped'+(k===pedKey?' sel':'');
+    d.innerHTML=`<div class="ph"><img src="${v.ref}" alt="${v.label}" loading="lazy"/></div><div class="lb"><b>${v.label}</b><small>${v.dims}</small></div>`;
+    d.onclick=()=>{pedKey=k;buildPeds();render();};
+    $('peds').appendChild(d);
+  }
+  $('pedHint').textContent=PEDS[pedKey].label+" — "+PEDS[pedKey].dims+". ";
+}
+
+function brandObj(){
+  const name=$('name').value||'Brand',slug=slugify(name),short=name.split(' ').slice(-1)[0];
+  const p=PEDS[pedKey];
+  return {
+    slug,name,short,website:$('site').value,shop:$('site').value,
+    device_name:$('device').value||'Chalice',deploy_subdomain:slug+'.syppit.com',
+    positioning:$('positioning').value,cjk_accents:$('cjk').checked,logo_file:'logo.png',
+    popup_shape:{key:pedKey,label:p.label,dims:p.dims,prompt:p.prompt,ref:p.ref,url:p.url},
+    seed:seed(),
+    brand_description:$('vibe').value,
+    device_description:$('devdesc').value||`<the SYPP Cloud Bar vessel re-skinned for ${name}: exact look, finish, branding, hand-held scale. STRICT: only this device.>`,
+    founder_ref:'founder.jpg',blends:[],
+    image_refs:['logo.png','device-front.jpg','device-in-hand.jpg (scale)','product-cutout.png','founder.jpg']
+  };
+}
+
+function render(){
+  const name=$('name').value||'Brand',slug=slugify(name),short=name.split(' ').slice(-1)[0].toUpperCase();
+  $('slugEcho').textContent=slug;
+  const pal=derive(seed());
+  // swatches
+  const keys=['red','red_deep','red_br','gold','gold_deep','gold_soft','bg','card','red_bg','red_bg2','red_mid','vitrine','ink','mute','red_ink','gold_or'];
+  $('sw').innerHTML=keys.map(k=>`<div class="sw" style="background:${pal[k]}" title="${k}: ${pal[k]}"></div>`).join('');
+  // mini cover (hero = .red)
+  const c=$('mCover');c.style.background=`radial-gradient(80% 70% at 78% 12%,${pal.red_mid},transparent 55%),linear-gradient(160deg,${pal.red_bg},${pal.red_bg2})`;c.style.color=pal.red_ink;
+  $('mCoin').style.background=`linear-gradient(135deg,${pal.red},${pal.red_deep})`;$('mCoin').style.color=pal.gold_or;$('mCoin').textContent=name[0]||'A';
+  $('mMarque').textContent=short+' × SYPP CLOUD BAR';$('mMarque').style.color=pal.gold_or;
+  $('mTitle').innerHTML=`The ${name.split(' ').slice(-1)[0]}<br/>Cloud Ritual`;
+  $('mTitle').style.color=$('cjk').checked?pal.gold_or:pal.red_ink;
+  $('mSub').textContent=$('positioning').value+' powered by SYPP Cloud Bar';$('mSub').style.color=pal.red_mute;
+  // mini light slide
+  const L=$('mLight');L.style.background=`radial-gradient(120% 90% at 80% 10%,${pal.bg2},${pal.bg} 60%)`;L.style.color=pal.ink;
+  $('mKk').style.color=pal.red;$('mP').style.color=pal.mute;
+  const chip=$('mChip');chip.style.color=pal.gold_deep;chip.style.borderColor=pal.gold_soft;chip.style.background=pal.card;
+  // commands
+  $('cmd').innerHTML=
+`<span class="c"># in the sypp-brand-pitch repo</span>
+python tools/build_deck.py ${slug}
+python tools/gen.py        ${slug}
+python tools/make_reel.py  ${slug}   <span class="c"># --pro for premium video</span>
+
+<span class="c"># deploy brands/${slug}/ to GitHub Pages -> ${slug}.syppit.com</span>`;
+}
+
+function download(){
+  const b=brandObj(),blob=new Blob([JSON.stringify(b,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='brand.json';a.click();
+}
+$('dl').onclick=download;
+$('cpJson').onclick=()=>{navigator.clipboard.writeText(JSON.stringify(brandObj(),null,2));$('cpJson').textContent='Copied ✓';setTimeout(()=>$('cpJson').textContent='Copy JSON',1200);};
+$('cpCmd').onclick=()=>{navigator.clipboard.writeText($('cmd').textContent);$('cpCmd').textContent='Copied ✓';setTimeout(()=>$('cpCmd').textContent='Copy commands',1200);};
+document.querySelectorAll('input,textarea,select').forEach(el=>el.addEventListener('input',render));
+buildPeds();render();
+</script>
+</body>
+</html>
